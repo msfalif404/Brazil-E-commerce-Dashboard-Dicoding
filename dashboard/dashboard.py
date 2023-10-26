@@ -13,8 +13,8 @@ sns.set(style='dark')
 st.set_page_config(page_title = "E-Commerce Dashboard")
 
 # Load cleaned data
-all_df = pd.read_csv("main_data.csv")
-late_delivery_geo_df = pd.read_csv("../data/late_delivery_geo.csv")
+all_df = pd.read_csv("./dashboard/main_data.csv")
+late_delivery_geo_df = pd.read_csv("./data/late_delivery_geo.csv")
 
 datetime_columns = ["shipping_limit_date","order_purchase_timestamp",
                     "order_approved_at", "order_delivered_carrier_date", "order_delivered_customer_date", 
