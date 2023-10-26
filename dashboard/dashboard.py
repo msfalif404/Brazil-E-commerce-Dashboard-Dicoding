@@ -197,7 +197,8 @@ with st.container():
 # Ploting the areas where many deliveries experience delays
 st.subheader('Show Areas Where Many Deliveries Experience Delays')
 
-with st.container():
+@st.cache_data
+def show_map_geo():
     lat = late_delivery_geo_df['geolocation_lat']
     lon = late_delivery_geo_df['geolocation_lng']
 
@@ -210,6 +211,9 @@ with st.container():
     m.drawcountries()
     m.scatter(lon, lat,zorder=10,alpha=0.5,color='tomato')
     st.pyplot(fig)
+
+with st.container():
+    show_map_geo()
 # End of plotting the areas where many deliveries experience delays
 
 # Ploting the top customer cities

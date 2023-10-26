@@ -4,6 +4,7 @@ import seaborn as sns
 
 from wordcloud import WordCloud
 
+@st.cache_data
 def create_monthly_orders_df(all_df):
     monthly_orders_df = all_df.resample(rule = "M", on = "order_approved_at").agg({
     "order_id": "nunique",
@@ -18,6 +19,7 @@ def create_monthly_orders_df(all_df):
 
     return monthly_orders_df
 
+@st.cache_data
 def create_most_used_payment_df(all_df):
     most_used_payment_method_df = all_df.groupby(by = "payment_type")["order_id"].nunique().reset_index()
     most_used_payment_method_df.rename(columns = {
@@ -26,6 +28,7 @@ def create_most_used_payment_df(all_df):
 
     return most_used_payment_method_df
 
+@st.cache_data
 def create_most_purchased_products_df(all_df):
     most_purchased_products_df = all_df.groupby(["product_id","product_category_name_english"])["order_id"].nunique().reset_index()
     most_purchased_products_df.rename(columns = {
@@ -35,6 +38,7 @@ def create_most_purchased_products_df(all_df):
 
     return most_purchased_products_df
 
+@st.cache_data
 def create_most_purchased_categories_df(all_df):
     most_purchased_product_categories_df = all_df.groupby(by = "product_category_name_english")["order_id"].nunique().reset_index()
     most_purchased_product_categories_df.rename(columns = {
@@ -43,6 +47,7 @@ def create_most_purchased_categories_df(all_df):
 
     return most_purchased_product_categories_df
 
+@st.cache_data
 def create_most_revenue_categories_df(all_df):
     most_revenue_categories_df = all_df.groupby(by = "product_category_name_english", as_index = False).agg({
     "order_id": "nunique",
@@ -55,6 +60,7 @@ def create_most_revenue_categories_df(all_df):
 
     return most_revenue_categories_df
 
+@st.cache_data
 def create_rating_distribution_df(all_df):
     rating_distribution_df = all_df.groupby(by = "review_score")["order_id"].nunique().reset_index()
     rating_distribution_df.rename(columns = {
@@ -63,6 +69,7 @@ def create_rating_distribution_df(all_df):
 
     return rating_distribution_df
 
+@st.cache_data
 def create_wordcloud(all_df):
     all_df["score_status"] = all_df["review_score"].apply(lambda x: 1 if x > 3 else -1)
 
@@ -72,12 +79,14 @@ def create_wordcloud(all_df):
 
     return wordcloud
 
+@st.cache_data
 def create_late_delivery_rating_distribution_df(all_df):
     late_delivery_orders_df = all_df[all_df["order_delivered_customer_date"] > all_df["order_estimated_delivery_date"]]
     count_by_status = late_delivery_orders_df['score_status'].value_counts()
 
     return count_by_status
 
+@st.cache_data
 def show_hist_between_order_time(all_df):
     fig, ax = plt.subplots(figsize=(12, 6))
     sns.histplot(all_df['order_delivered_customer_date'], kde=True, color='blue', label='Delivered Date')
@@ -90,6 +99,7 @@ def show_hist_between_order_time(all_df):
     
     return fig
 
+@st.cache_data
 def create_top_customer_cities_df(all_df):
     top_5_customer_cities_df = all_df.groupby(by = "customer_city")["customer_id"].nunique().sort_values(ascending = False).nlargest(5).reset_index()
     top_5_customer_cities_df.rename(columns = {
@@ -98,6 +108,7 @@ def create_top_customer_cities_df(all_df):
 
     return top_5_customer_cities_df
 
+@st.cache_data
 def create_top_seller_cities_df(all_df):
     top_5_seller_cities_df = all_df.groupby(by = "seller_city")["seller_id"].nunique().sort_values(ascending = False).nlargest(5).reset_index()
     top_5_seller_cities_df.rename(columns = {
@@ -106,6 +117,7 @@ def create_top_seller_cities_df(all_df):
 
     return top_5_seller_cities_df
 
+@st.cache_data
 def create_daily_sales_df(all_df):
     daily_sales = all_df.groupby(all_df['order_purchase_timestamp'].dt.dayofweek)['order_id'].nunique()
 
@@ -118,12 +130,14 @@ def create_daily_sales_df(all_df):
 
     return daily_sales
 
+@st.cache_data
 def create_hourly_sales_df(all_df):
     hourly_sales = all_df.groupby(all_df['order_purchase_timestamp'].dt.hour)['order_id'].nunique()
     hourly_sales_df = pd.DataFrame({'Jam': hourly_sales.index, 'Jumlah Pesanan': hourly_sales.values})
 
     return hourly_sales_df
 
+@st.cache_data
 def create_customer_segmentation_df(all_df):
     max_date = all_df["order_purchase_timestamp"].max()
 

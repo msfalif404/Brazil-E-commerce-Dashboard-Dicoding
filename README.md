@@ -16,5 +16,5 @@ streamlit run dashboard.py
 
 ## Dashboard Link
 ```
-https://brazil-ecommerce-dashboard-dicoding.streamlit.app/
+https://e-commerce-dashboard-dicoding-msfalif.streamlit.app/
 ```
