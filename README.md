@@ -1,6 +1,6 @@
-# Brazil-E-commerce-Dashboard-Dicoding
+# Brazil E-commerce Dashboard Dicoding
 
-Analyzing E-commerce in Brazil to find new insights.
+Analyzing E-commerce in Brazil to find new insights. In the analysis that has been carried out, I used the RFM method to divide customers into several segments. These segments include Champions, Loyal Customers, Promising and so on. This can be done by calculating the RFM first, then the results of the RFM will be calculated per quartile. After that, a customer can get his segment. This is useful for a company to know the quality of its customers. Do many people like to buy or do they rarely buy? Companies must think about customers who rarely buy so they can increase company profits.
 
 ## Setup Environment
 ```
@@ -12,4 +12,9 @@ Analyzing E-commerce in Brazil to find new insights.
 ## Run Streamlit App
 ```
 streamlit run dashboard.py
+```
+
+## Dashboard Link
+```
+https://brazil-ecommerce-dashboard-dicoding.streamlit.app/
 ```
