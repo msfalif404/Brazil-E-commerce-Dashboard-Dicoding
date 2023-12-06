@@ -11,7 +11,7 @@ Analyzing E-commerce in Brazil to find new insights. In the analysis that has be
 
 ## Run Streamlit App
 ```
-streamlit run dashboard.py
+streamlit run ./dashboard/dashboard.py
 ```
 
 ## Dashboard Link
